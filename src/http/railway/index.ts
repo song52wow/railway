@@ -19,7 +19,7 @@ export class Railway extends Train implements IRailWay {
   }
 
   private async _init () {
-    await this.getStationList()
-    // await this.getTrainList()
+    await this.checkUser()
+    await this.getTrainList()
   }
 }

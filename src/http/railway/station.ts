@@ -1,8 +1,8 @@
 
 import { promises } from 'fs'
-import superAgent from 'superagent'
 import { RailWayApi } from '../../config'
 import { logRes } from '../../tools/logs'
+import { superAgentRepeat } from '../../tools/superAgent'
 /**
  * 站点
  */
@@ -18,7 +18,7 @@ export class Station extends RailWayApi {
    * 网络请求获取站点信息
    */
   private async _httpGetStation () {
-    const getStationText = await superAgent.get(this.apiList.stationList)
+    const getStationText = await superAgentRepeat('get', this.apiList.stationList)
 
     logRes('Station info is successful obtained online', getStationText)
 
@@ -60,5 +60,7 @@ export class Station extends RailWayApi {
     }
 
     logRes('Get Station info successful')
+
+    return this._station
   }
 }
