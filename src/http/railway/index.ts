@@ -1,5 +1,6 @@
 
 import { Train } from './train'
+import { logErr } from '../../tools/logs'
 
 export interface IRailWayConstructorParams {
   from: string;
@@ -13,13 +14,27 @@ interface IRailWay {
 }
 
 export class Railway extends Train implements IRailWay {
+  protected _station: { [key: string]: string}
+
   constructor (obj: IRailWayConstructorParams) {
     super(obj)
     this._init()
+
+    this._station = {}
   }
 
   private async _init () {
-    await this.checkUser()
-    await this.getTrainList()
+    try {
+      await Promise.all([
+      // this.getTrainList(),
+        this.checkUser()
+      ])
+
+      await this.getRepeatToken()
+
+      await this.getUserPassport()
+    } catch (error) {
+      logErr(error.toString())
+    }
   }
 }

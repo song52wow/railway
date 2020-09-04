@@ -4,11 +4,17 @@
  * @param log 日志信息
  */
 export function logRes (...log: any[]) {
-  return console.log(JSON.stringify({
+  // return console.log(JSON.stringify({
+  //   dt: new Date(),
+  //   msg: log[0],
+  //   data: log[1]
+  // }))
+
+  return console.log({
     dt: new Date(),
     msg: log[0],
     data: log[1]
-  }))
+  })
 }
 
 /**

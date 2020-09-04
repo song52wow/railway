@@ -2,7 +2,7 @@
 import { promises } from 'fs'
 import { RailWayApi } from '../../config'
 import { logRes } from '../../tools/logs'
-import { superAgentRepeat } from '../../tools/superAgent'
+import superAgent from 'superagent'
 /**
  * 站点
  */
@@ -11,14 +11,26 @@ export class Station extends RailWayApi {
 
   constructor () {
     super()
+
     this._station = {}
+  }
+
+  /**
+   * 检测站点列表是否存在，否则请求获取
+   */
+  checkStationList () {
+    return new Promise((resolve, reject) => {
+      if (Object.values(this._station).length) return resolve()
+
+      this.getStationList().then(resolve)
+    })
   }
 
   /**
    * 网络请求获取站点信息
    */
   private async _httpGetStation () {
-    const getStationText = await superAgentRepeat('get', this.apiList.stationList)
+    const getStationText = await superAgent.get(this.apiList.stationList)
 
     logRes('Station info is successful obtained online', getStationText)
 
@@ -58,9 +70,5 @@ export class Station extends RailWayApi {
 
       this._station = res
     }
-
-    logRes('Get Station info successful')
-
-    return this._station
   }
 }
