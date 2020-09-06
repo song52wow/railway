@@ -11,7 +11,7 @@
       "program": "${workspaceFolder}/src/app.ts",
       "request": "launch",
       "restart": true,
-      "runtimeExecutable": "/Users/hari/Desktop/Github/grab-votes/node_modules/nodemon/bin/nodemon.js",
+      "runtimeExecutable": "/home/hari/railway/node_modules/nodemon/bin/nodemon.js",
       "skipFiles": [
         "<node_internals>/**"
       ],

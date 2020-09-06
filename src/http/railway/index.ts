@@ -27,8 +27,10 @@ export class Railway extends Train implements IRailWay {
     try {
       await Promise.all([
       // this.getTrainList(),
-        this.checkUser()
+        // this.checkUser()
       ])
+
+      // await this.submitOrderRequest()
 
       await this.getRepeatToken()
 

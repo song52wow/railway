@@ -19,15 +19,15 @@ class SuperAgentRepeat extends Station {
     const jcSaveFromStation = transUnicode(setting.from + ',') + this._station[setting.from]
     const jcSaveToStation = transUnicode(setting.to + ',') + this._station[setting.to]
 
-    return `_uab_collina=159893253355515017452495; JSESSIONID=02803FC40D2F98AD9E55989A948A8B8C; BIGipServerotn=1658388746.24610.0000; RAIL_EXPIRATION=1599235400998; RAIL_DEVICEID=Ff7yWFEsJ6-dLsjuJmEaIKOnMsM3OOLnZZ5Sm0keEDowH2Wil_sb2mEtMZkFzCKpk3dRPXo4_E6cF5fQ1xs4gIeK66sHQUSa0d63e_fdvPevd6C9O3YcVBMDCYffZkdL1mzVMV3Dlb15wd0JcBYiorU7KXGX-WJ9; BIGipServerpassport=887619850.50215.0000; route=c5c62a339e7744272a54643b3be5bf64;  _jc_save_toDate=2020-09-01; _jc_save_wfdc_flag=dc; current_captcha_type=Z; uKey=ee6c8847203656a9e770b79198e59c813d0c900791d46c97cba566348fd6404d; _jc_save_fromDate=${setting.time}; _jc_save_fromStation=${jcSaveFromStation}; _jc_save_toStation=${jcSaveToStation}; tk=${setting.tk}`
+    return `JSESSIONID=D964595B825DE894688CDFDE63935216; tk=${setting.tk}; RAIL_EXPIRATION=1599450690579; RAIL_DEVICEID=HxAZpjB6EE9_c6VYDoIpZ7y5RlM3ab0Ll_c5fmKfAKasJWak-6ooaQnecknA_EdQJhuDs4pfwxukOrJAGm06TLWD46L72HlCTTFwt0E1CGmN98m8SV7tstOOw5AoiB4Xfdnlc1sWXXg0KnCAUVIFHJ-oSangyx_e; _jc_save_toStation=${jcSaveToStation}; _jc_save_wfdc_flag=dc; _jc_save_fromStation=${jcSaveFromStation}; BIGipServerpassport=954728714.50215.0000; route=9036359bb8a8a461c164a04f8f50b252; BIGipServerotn=1926824202.24610.0000; current_captcha_type=Z; _jc_save_toDate=2020-09-06; _jc_save_fromDate=${setting.time}; uKey=ee6c8847203656a9e770b79198e59c8103f5f04d0a5ee065b2701e14f61a50fc`
   }
 
   get (api: string, query?: any) {
     return superAgent.get(api).query(query).set('Cookie', this._cookie()).set('User-Agent', this._userAgent)
   }
 
-  post (api: string, params?: any) {
-    return superAgent.post(api).send(params).set('Cookie', this._cookie()).set('User-Agent', this._userAgent)
+  post (api: string) {
+    return superAgent.post(api).type('form').set('Cookie', this._cookie()).set('User-Agent', this._userAgent)
   }
 }
 
