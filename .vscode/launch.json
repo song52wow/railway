@@ -11,7 +11,7 @@
       "program": "${workspaceFolder}/src/app.ts",
       "request": "launch",
       "restart": true,
-      "runtimeExecutable": "/home/hari/railway/node_modules/nodemon/bin/nodemon.js",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/nodemon/bin/nodemon.js",
       "skipFiles": [
         "<node_internals>/**"
       ],

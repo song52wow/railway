@@ -14,10 +14,34 @@ export class Train extends Station {
     this.repeatToken = ''
   }
 
+  /**
+   * 获取列车列表
+   */
+  async getTrainList () {
+    // 判断站点列表是否存在，不存在则先获取
+    await this.checkStationList()
+
+    const query = {
+      'leftTicketDTO.train_date': this._obj.time,
+      'leftTicketDTO.from_station': this._station[this._obj.from],
+      'leftTicketDTO.to_station': this._station[this._obj.to],
+      purpose_codes: 'ADULT'
+    }
+
+    const data = await superAgentRepeat.get(this.apiList.trainList, query)
+
+    logRes('Train list is successful obtained online', data)
+  }
+
+  /**
+   * 获取用户JSESSIONID
+   */
   async checkUser () {
     const data = await superAgentRepeat.post(this.apiList.checkUser).send({ _json_att: '' })
 
     logRes('This user is valid', data)
+
+    superAgentRepeat.JSESSIONID = data.headers['set-cookie'][0].match(/^JSESSIONID=(.*);(.*)/)[1]
   }
 
   async submitOrderRequest () {
@@ -58,24 +82,5 @@ export class Train extends Station {
     const data = await superAgentRepeat.post(this.apiList.getPassengerDTOs).send({ _json_att: '', REPEAT_SUBMIT_TOKEN: this.repeatToken })
 
     logRes('Get user passport successful', data)
-  }
-
-  /**
-   * 获取列车列表
-   */
-  async getTrainList () {
-    // 判断站点列表是否存在，不存在则先获取
-    await this.checkStationList()
-
-    const query = {
-      'leftTicketDTO.train_date': this._obj.time,
-      'leftTicketDTO.from_station': this._station[this._obj.from],
-      'leftTicketDTO.to_station': this._station[this._obj.to],
-      purpose_codes: 'ADULT'
-    }
-
-    const data = await superAgentRepeat.get(this.apiList.trainList, query)
-
-    logRes('Train list is successful obtained online', data.text)
   }
 }
