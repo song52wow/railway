@@ -1,12 +1,12 @@
 
 import { promises } from 'fs'
-import { RailWayApi } from '../../config'
 import { logRes } from '../../tools/logs'
 import superAgent from 'superagent'
+import { User } from './user'
 /**
  * 站点
  */
-export class Station extends RailWayApi {
+export class Station extends User {
   protected _station: {[key: string]: string}
 
   constructor () {

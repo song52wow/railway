@@ -1,11 +1,13 @@
 export enum baseUrl {
   // 铁路
   // eslint-disable-next-line no-unused-vars
-  railWay = 'https://kyfw.12306.cn/otn'
+  railWay = 'https://kyfw.12306.cn'
 }
 
 export class RailWayApi {
   apiList: {
+    /** 二维码登录 */
+    login: string
     /** 站点列表 */
     stationList: string;
     /** 列车班次 */
@@ -21,13 +23,13 @@ export class RailWayApi {
 
   constructor () {
     this.apiList = {
-      stationList: baseUrl.railWay + '/resources/js/framework/station_name.js',
-      trainList: baseUrl.railWay + '/leftTicket/query',
-      checkUser: baseUrl.railWay + '/login/checkUser',
-      getRepeatToken: baseUrl.railWay + '/confirmPassenger/initDc',
-      getPassengerDTOs: baseUrl.railWay + '/confirmPassenger/getPassengerDTOs',
-
-      submitOrderRequest: baseUrl.railWay + '/leftTicket/submitOrderRequest'
+      login: baseUrl.railWay + '/passport/web/create-qr64',
+      stationList: baseUrl.railWay + '/otn/resources/js/framework/station_name.js',
+      trainList: baseUrl.railWay + '/otn/leftTicket/query',
+      checkUser: baseUrl.railWay + '/otn/login/checkUser',
+      getRepeatToken: baseUrl.railWay + '/otn/confirmPassenger/initDc',
+      getPassengerDTOs: baseUrl.railWay + '/otn/confirmPassenger/getPassengerDTOs',
+      submitOrderRequest: baseUrl.railWay + '/otn/leftTicket/submitOrderRequest'
     }
   }
 }

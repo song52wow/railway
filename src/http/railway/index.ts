@@ -2,8 +2,6 @@
 import { Train } from './train'
 import { logErr } from '../../tools/logs'
 
-import superAgent from 'superagent'
-
 export interface IRailWayConstructorParams {
   from: string;
   to: string;
@@ -27,16 +25,18 @@ export class Railway extends Train implements IRailWay {
 
   private async _init () {
     try {
-      await Promise.all([
-        this.getTrainList(),
-        this.checkUser()
-      ])
+      await this.login()
 
-      // await this.submitOrderRequest()
+      // await Promise.all([
+      //   this.getTrainList(),
+      //   this.checkUser()
+      // ])
 
-      await this.getRepeatToken()
+      // // await this.submitOrderRequest()
 
-      await this.getUserPassport()
+      // await this.getRepeatToken()
+
+      // await this.getUserPassport()
     } catch (error) {
       logErr(error.toString())
     }
