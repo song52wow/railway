@@ -1,3 +1,8 @@
+export const serverConfig = {
+  port: 12306,
+  hostname: '127.0.0.1'
+}
+
 export enum baseUrl {
   // 铁路
   // eslint-disable-next-line no-unused-vars
